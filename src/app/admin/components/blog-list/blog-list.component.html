@@ -1,0 +1,38 @@
+ 
+<div class="wrapper d-flex align-items-stretch">
+    <app-header></app-header>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5 col-md-10">
+        <h2 class="mb-4">Manage Blog</h2>
+        
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th width="10%" scope="col">Image</th>
+                <th width="35%" scope="col">Title</th>
+                <th width="35%" scope="col">Small Description</th>
+                <th width="10%" scope="col">Date</th>
+                <th width="10%" scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let list of bloglists index as i">
+                <th scope="row">{{i+1}}</th>
+                <td><img src="{{list['nr_image']}}" width="100px"></td>
+                <td>{{list['nr_title']}}</td>
+                <td><p class="para">{{list['nr_description']}}</p></td>
+                <td>{{list['nr_publish_date'] | date:'dd-MM-YYYY'}}</td>
+                <td>
+                    <button (click)="deleteblog(list['nr_id'])"  class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                    <a routerLink="/admin/manage-blog/{{list['nr_id']}}"   class="btn btn-outline-dark" style="border: none;"><i class="fa fa-edit"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         
+
+    </div>
+</div>
+

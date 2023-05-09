@@ -1,0 +1,78 @@
+.logo img { width:100px; margin:0px; padding:0px;}
+.capslized{ text-transform:capitalize;}
+
+
+.bg-gradient-cosmic {
+    background: linear-gradient(to right, #8e2de2, #4a00e0)!important;
+}
+
+.widgets-icons-2 {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ededed;
+    font-size: 14px;
+	font-weight:bold;
+    border-radius: 10px;
+}
+
+.bg-gradient-ibiza {
+    background: #ee0979;
+    background: -webkit-linear-gradient( 45deg , #ee0979, #ff6a00)!important;
+    background: linear-gradient( 45deg , #ee0979, #ff6a00)!important;
+}
+
+.bg-gradient-cosmic {
+	background: linear-gradient(to right, #8e2de2, #4a00e0)!important
+}
+
+.bg-gradient-burning {
+	background: linear-gradient(to right, #ff416c, #ff4b2b)!important
+}
+
+.bg-gradient-lush {
+	background: linear-gradient(to right, #56ab2f, #a8e063)!important
+}
+
+.bg-gradient-kyoto {
+	background: linear-gradient(to right, #f7971e, #ffd200)!important
+}
+
+.bg-gradient-blues {
+	background: linear-gradient(to right, #56ccf2, #2f80ed)!important
+}
+
+.bg-gradient-moonlit {
+	background: linear-gradient(to right, #0f2027, #203a43, #2c5364)!important
+}
+.ms-auto {
+    margin-left: auto!important;
+}
+
+
+.zerotop{ padding-top:0px!important;}
+.zerobottom{ padding-bottom:0px!important;}
+.zeroleft{ padding-left:0px!important;}
+.zeroright{ padding-right:0px!important;}
+.nopadding{ padding:0px!important;}
+
+#sidebar-menu ul li a{ font-weight:bold;}
+
+.metlist{
+height: 476px;
+    overflow: auto;
+}
+
+
+.nav-justified .nav-item{ position:relative;}
+ .nav-tabs>li>a {   font-weight:bold;}
+ 
+ .nav-tabs .nav-link{ height:80px;}
+ 
+ .widgets-icons-2{ padding:0px; width:auto!important; height:auto!important; padding:8px 15px;}
+ 
+ 
+ 
+ 

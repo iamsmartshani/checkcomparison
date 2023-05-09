@@ -1,0 +1,194 @@
+ 
+
+
+
+<div class="wrapper d-flex align-items-stretch">
+    <app-header></app-header>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5 col-md-10" *ngIf="!editdatalist">
+        <h2 class="mb-4">Add Blog</h2>
+        
+            <form  #addblog="ngForm" (ngSubmit)="add_blog(addblog.value)"  class="formbox" method="post"  enctype="multipart/form-data">
+           
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example3"><b>Blog Title <span class="darkred">*</span></b></label>
+                <input type="text" required #blogtitle="ngModel" minlength="30"   ngModel name="blogtitle" id="blogtitle" class="form-control" />
+                <a href="javascript:void(0);" class="btn-block" onclick="createGeneralFrontUrl('blogtitle','blogurl','-')" class="generate_url">Generate URL</a>
+                <!-- <span class="alert-error" *ngIf="blogtitle.invalid && blogtitle.touched" style="color:#ff0000; font-size: 11px; ">* Please Enter Blog Title</span> -->
+                <span class="alert-error" *ngIf="blogtitle.invalid && (blogtitle.dirty || blogtitle.touched) && !blogtitle.errors?.['minlength']" style="color:#ff0000; font-size: 11px; ">* Please Enter Blog Title</span>
+                
+            </div>
+
+            
+             
+             
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example3"><b>Blog URL <span class="darkred">*</span></b></label>
+                <input type="text" #blogurl="ngModel"  ngModel name="blogurl" id="blogurl" required class="form-control" />
+                <span class="alert-error" *ngIf="blogurl.invalid && (blogurl.dirty || blogurl.touched) && !blogurl.errors?.['minlength'] " style="color:#ff0000; font-size: 11px; ">* Please Generate Blog URL</span>
+            </div>
+
+                        
+
+             
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example4"><b>Small Description <span class="darkred">*</span></b></label>
+                <textarea #smalldesc="ngModel" ngModel name="smalldesc" style="height:120px;" class="form-control"></textarea>
+                <span class="alert-error" *ngIf="smalldesc.invalid && (smalldesc.dirty || smalldesc.touched) && !smalldesc.errors?.['minlength'] " style="color:#ff0000; font-size: 11px; ">* Please Enter Small Description</span>
+            </div>
+ 
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example4"><b>Long Description <span class="darkred">*</span></b></label>
+                <textarea style="height:120px;" #longdesc="ngModel" ngModel name="longdesc" id="long_desc" class="form-control tinymce"></textarea>
+                <!-- <span class="alert-error" *ngIf="longdesc.invalid && (longdesc.dirty || longdesc.touched) && !longdesc.errors?.['minlength'] " style="color:#ff0000; font-size: 11px; ">* Please Enter Large Description</span> -->
+            </div>  
+
+
+            <!-- <textarea #longdesc="ngModel" ngModel name="longdesc" [(ngModel)]="editdatalist['0']['nr_large_description']"   style="height:120px;" class="form-control"></textarea> -->
+
+            <!-- <textarea class="form-control tinymce" name="long_desc" id="long_desc" rows="3" style="display:none; "   placeholder="Long sdfhskdfh "></textarea> -->
+            
+            
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example6"><b>Banner Image <span class="darkred">*</span><small class="text-danger">(Banner size
+                            should be 1500px X 1000px)</small></b></label>
+                <input type="file"  (change)="onChange($event)"    class="form-control">
+                
+                 <input type="hidden" #file="ngModel" ngModel name="file" [(ngModel)]="baseimage">
+
+                 <div *ngIf="myImage"> 
+                    <img [src]="myImage" width="70" height="70"/>
+                    </div>
+            </div>
+ 
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Title</b></label>
+                <input type="text" #metatitle="ngModel" ngModel name="metatitle"   class="form-control">
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Keyword</b></label>
+                <input type="text" #metakeyword="ngModel" ngModel name="metakeyword"   class="form-control">
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Description</b></label>
+                <input type="text" #metadesc="ngModel" ngModel name="metadesc" class="form-control">
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Priority</b></label>
+                <input type="number" #priority="ngModel" ngModel name="priority" class="form-control">
+            </div>
+
+            <input type="hidden" value="Y" #status="ngModel" ngModel name="status" class="form-control">
+
+            <!-- <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Is Active</b></label>
+                <select #status="ngModel" ngModel name="status" class="form-control">
+                    <option value="Y" selected>Show</option>
+                    <option value="N">Hide</option>
+                </select>
+            </div> -->
+            
+            <button type="submit" class="btn btn-primary btn-block mb-4">Add Blog</button>
+        </form>
+    </div>
+
+
+
+    <div id="content" class="p-4 p-md-5 pt-5 col-md-10" *ngIf="editdatalist">
+         
+        <h2 class="mb-4">Edit Blog</h2>
+         
+            <form  #updatedblog="ngForm" (ngSubmit)="update_blog(updatedblog.value)" class="formbox" method="post"  enctype="multipart/form-data">
+       
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example3"><b>Blog Title <span class="darkred">*</span></b></label>
+                <input type="text" required #blogtitle="ngModel" [(ngModel)]="editdatalist['0']['nr_title']"    ngModel name="blogtitle" id="blogtitle" class="form-control" />
+                <a href="javascript:void(0);" class="btn-block" onclick="createGeneralFrontUrl('blogtitle','blogurl','-')" class="generate_url">Generate URL</a>
+            </div>
+             
+             
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example3"><b>Blog URL <span class="darkred">*</span></b></label>
+                <input type="text" #blogurl="ngModel" ngModel name="blogurl" [(ngModel)]="editdatalist['0']['nr_front_url']"    id="blogurl" class="form-control" />
+            </div>
+
+             
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example4"><b>Small Description <span class="darkred">*</span></b></label>
+                <textarea #smalldesc="ngModel" ngModel name="smalldesc" [(ngModel)]="editdatalist['0']['nr_description']"  style="height:120px;" class="form-control"></textarea>
+            </div>
+ 
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example4"><b>Long Description <span class="darkred">*</span></b></label>
+                <textarea #longdesc="ngModel" ngModel name="longdesc" [(ngModel)]="editdatalist['0']['nr_large_description']"   style="height:120px;" class="form-control tinymce"></textarea>
+            </div>  
+            
+            
+            
+            
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example6"><b>Banner Image <span class="darkred">*</span><small class="text-danger">(Banner size
+                            should be 1500px X 1000px)</small></b></label>
+                <input type="file"  (change)="onChange($event)"    class="form-control">
+                <input type="hidden" #file="ngModel" ngModel name="file" [(ngModel)]="baseimage">
+                <input type="hidden" #old_image="ngModel" ngModel name="old_image"   [(ngModel)]="editdatalist['0']['old_image']">
+                 <div *ngIf="myImage"> 
+                    <img [src]="myImage" width="70" height="70"/>
+                    </div>
+            </div>
+ 
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Title</b></label>
+                <textarea #metatitle="ngModel" ngModel name="metatitle"  [(ngModel)]="editdatalist['0']['nr_mtitle']"  class="form-control"></textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Keyword</b></label>
+                <textarea #metakeyword="ngModel" ngModel name="metakeyword" [(ngModel)]="editdatalist['0']['nr_mkeyword']"    class="form-control"></textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Meta Description</b></label>
+                <textarea #metadesc="ngModel" ngModel name="metadesc" [(ngModel)]="editdatalist['0']['nr_mdescription']"   class="form-control"></textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Priority</b></label>
+                <input type="number" #priority="ngModel" ngModel name="priority" [(ngModel)]="editdatalist['0']['nr_priority']"   class="form-control">
+            </div>
+             
+            <input type="hidden" value="Y" #status="ngModel" ngModel name="status" class="form-control">
+            <!-- <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7"><b>Is Active {{editdatalist['0']['nr_active']}}</b></label>
+                <select  name="status" class="form-control" #status="ngModel" ngModel aria-label="Default select example">
+                    <option Default>Select One</option>
+                    <option  [selected]="editdatalist['0']['nr_active'] =='Y'">Show</option>
+                    <option   [selected]="editdatalist['0']['nr_active'] =='N'">Hide</option>
+                </select>
+            </div> -->
+            
+            <!-- <div class="form-outline mb-4">
+                <input type="checkbox" [checked]="editdatalist['0']['nr_active'] == 'Y'" name="status"  #status="ngModel" ngModel value="Y"> Show
+                <input type="checkbox" [checked]="editdatalist['0']['nr_active'] == 'N'" name="status"  #status="ngModel" ngModel value="N"> Hide
+            </div> -->
+                
+            
+            
+            
+            <input type="hidden" #editid="ngModel" ngModel name="editid" [(ngModel)]="editdatalist['0']['nr_id']">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Edit Blog</button>
+        </form>
+    </div>
+     
+
+</div>
+
+
+
+ 
+
+

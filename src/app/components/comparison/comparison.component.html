@@ -1,0 +1,263 @@
+<!-- Start Breadcrumb 
+    ============================================= -->
+<div class="breadcrumb-area bg-gray text-center shadow dark text-light bg-cover"
+    style="background-image: url(assets/img/17.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h1>Comparison</h1>
+                <ul class="breadcrumb">
+                    <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="active">Comparison</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb -->
+
+
+<section class="ftco-section event-area default-padding bottom-less">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">College Comparison</h2>
+            </div>
+        </div>
+
+        <!-- <div>
+            <select required #college1="ngModel" ngModel name="college1">
+              <option value="" selected="selected" disabled="disabled">Select College</option>
+              <option *ngFor="let deviceModel of DeviceModelList" [value]="deviceModel">{{deviceModel}}</option>
+            </select>
+            </div> -->
+  
+           
+
+        <form class="gdlr-core-course-form clearfix" #findCollege="ngForm" method="post"
+            (ngSubmit)="getFindCollegeData(findCollege.value)">
+            <div class="row" style="margin-bottom:15px;">
+                <div class="col-md-5">
+                     
+                    
+                    <input type="text"  [(ngModel)]="cgl1" #college1="ngModel" ngModel name="college1" placeholder="Enter College Name" class="form-control"
+                        list="collegelist1" />
+                    <datalist id="collegelist1">
+                        <option *ngFor="let college of clist" [value]="college.institute_url">
+                            {{college.institute_name}}</option>
+                    </datalist>
+                    <!-- <select required #college1="ngModel" ngModel name="college1">
+                        <option value="sage-university-bhopal" selected>Select College</option>
+                        <option value="global-institute-of-business-studies">Global Institute of Business Studies
+                        </option>
+                        <option value="guru-kashi-university">Guru Kashi University</option>
+                        <option value="milestones-institute-of-allied-health-sciences">Milestones Institute Of Allied
+                            Health Sciences</option>
+                        <option value="woxsen-university">Woxsen University</option>
+                        <option value="ganga-group-of-institutions">Ganga Group Of Institutions</option>
+                        <option value="shri-dhanwantry-ayurvedic-college-hospital">Shri Dhanwantry Ayurvedic College &
+                            Hospital</option>
+                        <option value="shri-dhanwantry-ayurvedic-college-hospital">Shri Dhanwantry Ayurvedic College &
+                            Hospital</option>
+                        <option value="kalka-dental-college">Kalka Dental college</option>
+                        <option value="om-sterling-global-university">Om Sterling Global University</option>
+                        <option value="harmony-ayurvedic-medical-college-hospital">Harmony Ayurvedic Medical College &
+                            Hospital</option>
+                    </select> -->
+                </div>
+                <div class="col-md-5">
+                    <!-- <select required #college2="ngModel" ngModel name="college2" class="form-control">
+                            <option *ngFor="let college of clist" [value]="college.institute_name">
+                                {{college.institute_name}}</option>
+                    </select> -->
+
+                <input type="text" [(ngModel)]="cgl2"  #college2="ngModel" ngModel name="college2" placeholder="Enter College Name" class="form-control"
+                list="collegelist2" />
+                <datalist id="collegelist2">
+                <option *ngFor="let college of clist" [value]="college.institute_url">
+                {{college.institute_name}}</option>
+                </datalist>
+                </div>
+
+                <div class="col-md-2"><input type="submit" value="Compare Now" class="btn btn-theme effect btn-sm"
+                        style="padding:13px 0; width:100%;"></div>
+            </div>
+        </form>
+ 
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap table-responsive">
+                    <table class="table" *ngIf="complist && complist.length">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th width="20%" style="vertical-align: middle;">College Name</th>
+                                <th width="40%"><img src="{{ complist[0].institute_logo}}" width="50px;">
+                                    <h4>{{ complist[0].institute_name}}</h4>
+                                </th>
+                                <th width="40%"><img src="{{ complist[1].institute_logo}}" width="50px;">
+                                    <h4>{{ complist[1].institute_name}}</h4>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3" class="specl"><h5 class="mb-0"><b>College Rankings & Award</b></h5></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Ranking & Award</th>
+                                <td>
+                                    <div class="ranks">
+                                        <ul *ngFor="let rank1 of complist[0].awardlist"> 
+                                            <li><i class="fa fa-trophy"></i>{{rank1.awd_title}}</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td> 
+                                    <div class="ranks">
+                                        <ul *ngFor="let rank2 of complist[1].awardlist"> 
+                                            <li><i class="fa fa-trophy"></i>{{rank2.awd_title}}</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" class="scope">Ranking by NIRF</th>
+                                <td> - </td>
+                                <td> - </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="specl"><h5 class="mb-0"><b>Courses Offered</b></h5></td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" class="scope">Course</th>
+                                <td><strong>{{ complist[0].coursecount}} + Courses</strong>
+                                    <div class="mycoures">
+                                        <table class="text-center w-100">
+                                            <tr *ngFor="let cours1 of complist[0].courselist">
+                                                <td style="padding: 5px 0; margin: 0px;">{{cours1.course_category}} - [{{cours1.course_name}}] <a target="_blank"  class="text-primary" routerLink="/college/{{complist[0].institute_url}}">+{{cours1.count}}</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </td>
+                                <td><strong>{{ complist[1].coursecount}} + Courses</strong>
+
+                                    <div class="mycoures">
+                                        <table class="text-center w-100">
+                                            <tr *ngFor="let cours2 of complist[1].courselist">
+                                                <td style="padding: 5px 0; margin: 0px;">{{cours2.course_category}} - [{{cours2.course_name}}] <a target="_blank" class="text-primary" routerLink="/college/{{complist[1].institute_url}}">+{{cours2.count}}</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="specl"><h5 class="mb-0"><b>College Details</b></h5></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Established</th>
+                                <td>{{ complist[0].establish}}</td>
+                                <td>{{ complist[1].establish}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Ownership</th>
+                                <td>{{ complist[0].college_type}}</td>
+                                <td>{{ complist[1].college_type}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Affiliated</th>
+                                <td>{{ complist[0].affiliated}}</td>
+                                <td>{{ complist[1].affiliated}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Approved by</th>
+                                <td>{{ complist[0].approved_by}}</td>
+                                <td>{{ complist[1].approved_by}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Location</th>
+                                <td>{{ complist[0].city}}, {{ complist[0].state}}</td>
+                                <td>{{ complist[1].city}}, {{ complist[1].state}}</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="specl"><h5 class="mb-0"><b>College Facilities</b></h5></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Facilities</th>
+                                <td>
+                                    <!-- {{ complist[0].facilities[0]}}                                     -->
+                                    <!-- <img src="http://127.0.0.1:5000/static/assets/facility/{{complist[0].facilities[0][1]}}"> -->
+
+                                <ul>
+                                    <ul>
+                                        <li *ngFor="let hov of complist[0].facilities" class="faclty">
+                                            <img src="{{hov.nr_image}}" width="15px">
+                                            <!-- <i class="fa fa-check text-success"></i> -->
+                                            {{hov.name}}
+                                          
+                                        </li>    
+                                    </ul>  
+                                </ul>
+
+                                </td>
+                                <td>
+                                    
+                                        <ul>
+                                            <li *ngFor="let hov2 of complist[1].facilities"  class="faclty">
+                                            <!-- <i class="fa fa-check text-success"></i> -->
+                                            <img src="{{hov2.nr_image}}" width="15px">
+                                            {{hov2.name}}
+                                            </li>    
+                                        </ul>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="specl"><h5 class="mb-0"><b>Top Placement Companies</b></h5></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">Top Placement Companies</th>
+                                <td> 
+                                    <div class="placement">
+                                        <ul>
+                                            <li *ngFor="let top1 of complist[0].placement_company_list">
+                                            <img src="{{top1.company_logo}}"
+                                                alt="{{top1.company_name}}">
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    
+
+                                    <div class="placement">
+                                        <ul>
+                                            <li *ngFor="let top2 of complist[1].placement_company_list">
+                                            <img src="{{top2.company_logo}}"
+                                                alt="{{top2.company_name}}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                     
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

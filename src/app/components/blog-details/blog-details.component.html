@@ -1,0 +1,59 @@
+<!-- Start Breadcrumb 
+    ============================================= -->
+    <div *ngFor="let info of  alldetails" class="breadcrumb-area bg-gray text-center shadow dark text-light bg-cover"  style="background-image: url({{info['nr_image']}})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>{{info['nr_title']}}</h1>
+                    <ul class="breadcrumb">
+                        <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a routerLink="/blog">Blog</a></li>
+                        <li class="active">Blog Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Blog
+    ============================================= -->
+    <div class="blog-area single full-blog full-blog default-padding"  *ngFor="let info of  alldetails">
+        <div class="container">
+            <div class="blog-items">
+                <div class="row">
+                    <div class="blog-content col-lg-10 offset-lg-1 col-md-12">
+                        <div class="item">
+
+                            <div class="blog-item-box">
+                                <!-- Start Post Thumb -->
+                                <!-- <div class="thumb">
+                                    <img src="{{info['nr_image']}}" alt="Thumb" style="width: 100%!Important;">
+                                </div> -->
+                                <!-- Start Post Thumb -->
+
+                                <div class="content">
+                                    <h3>{{info['nr_title']}}</h3>
+                                    <p class="about-txt" [innerHTML]="blogdetails"></p>
+                                    <div class="top-info">
+                                        <ul>
+                                            <li>
+                                                <i class="fas fa-calendar-alt"></i> {{info['nr_publish_date'] | date:'MMMM dd, YYYY'}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start Post Pagination -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog -->
+    
+
+     

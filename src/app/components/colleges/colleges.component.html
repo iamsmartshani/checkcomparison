@@ -1,0 +1,159 @@
+ <!-- Start Breadcrumb 
+    ============================================= -->
+    <div class="breadcrumb-area bg-gray text-center shadow dark text-light bg-cover" style="background-image: url(assets/img/17.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>College List</h1>
+                    <ul class="breadcrumb">
+                        <li><a routerLink="/"><i class="fas fa-home"></i>Home</a></li>
+                        <li class="active">Colleges</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Star Event Area
+    ============================================= -->
+    
+     
+
+    <div class="event-area default-padding bottom-less">
+        <div class="container">
+            <div class="event-area">
+                <div class="row">
+                     <!-- Single Event -->
+                    <div  class="single-event col-lg-12">
+                        <div class="fullrow">
+
+                            <div class="row">
+                            
+                             <!-- Start Sidebar -->
+                            <div class="sidebar col-lg-3 col-md-12">
+
+                                <aside>
+                                    <div class="sidebar-item category">
+                                        <div class="title pt-3">
+                                            <h4> <strong>College by Stream</strong></h4>
+                                        </div>
+                                        <div class="sidebar-info">
+                                            <ul>
+
+                                                
+                                                    <li> 
+                                                        <a routerLink="/colleges">All</a> 
+                                                    </li>
+
+                                                    <li *ngFor="let stm of stream">
+                                                        <a routerLink="/colleges/{{stm.url}}-college">{{stm.course_category}}</a>
+                                                    </li>
+                                                    
+                                                    <!-- <li>
+                                                        <a routerLink="/colleges/engineering-college">Engineering College </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a routerLink="/colleges/paramedical-college">Paramedical College</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a routerLink="/colleges/hotel-management">Hotel  Management</a>
+                                                    </li> -->
+                                                    
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>
+                    <!-- End Start Sidebar -->   
+                                
+                            <div class="col-md-9">
+                                <div class="event-box" *ngFor="let college of colleges">
+                                    <div class="row">
+                                        <div class="col-lg-3 p-0 item thumb">
+                                            <a routerLink="/college/{{college['institute_url']}}"><img src="{{college['institute_image']}}" style="border-radius:5px 0 0 5px;"></a>
+                                        </div>
+                                        <div class="col-lg-6 p-0 col-md-5 item">
+                                            <div class="info">
+                                                <div class="row">
+                                                    <div class="col-md-2" style="padding: 0px;"><img src="{{college['institute_logo']}}" class="smallschiilicon"></div>
+                                                    <div class="col-md-10" style="padding-left: 0px;">
+                                                        <h5>
+                                                            <strong>{{college['institute_name']}}</strong>
+                                                            <span style="display:block;"><small><i class="icon_pin_alt" style="color: #ff0000;"></i> {{college['city']}}, {{college['state']}} | {{college['approved_by']}} Approved</small></span>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="sq-tag">
+                                                        <a routerLink="/college/{{college['institute_url']}}">Admission 2022</a>
+                                                        <a routerLink="/college/{{college['institute_url']}}">Courses & Fee <span class="text-primary"> - {{college['courselist'][0]['count']}} Courses</span></a>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="row">
+                                                    <div class="courelists">
+                                                        <ul>
+                                                            <li *ngFor="let cours1 of college['courselist']">
+                                                                {{cours1.course_category}} 
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div> -->
+
+                                                
+                                                <!-- <ul>
+                                                    <li>
+                                                        <i class="icon_pin_alt"></i> California, TX 70240
+                                                    </li>
+                                                    <li>
+                                                        <i class="icon_building"></i> Room 202, First Floor
+                                                    </li>
+                                                </ul> -->
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-lg-3 p-0 col-md-7 item">
+                                            <div class="content">
+                                                <div class="col-lg-12 col-md-6" >
+                                                    <button type="submit" [disabled]="college.isSelected" onclick="this.disabled=true"   class="btn-sm btn-dark effect" [id]="college['institute_url']"  (click)=addcompare(college) style="padding: 10px 0; display:block; width: 100%;">Add to Compare</button>
+                                                </div>
+                                                <div class="col-lg-12 col-md-6">
+                                                    <a routerLink="/college/{{college['institute_url']}}" class="btn-sm text-center btn-primary effect" style="padding: 10px 0; display:block; width: 100%;">Apply Now</a>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Single Event -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Event Area -->
+
+ 
+    <div onmouseover="getopen()" class="comparebox" *ngIf="totalItem > 0">
+        <div class="compbg"><a routerLink="/comparison">COMPARE<span class="puls">{{totalItem}}</span></a> </div>
+
+        <div  class="modal-nodes" style="display:none; ">
+            <span class="mdclose"><a onclick="closemd()">X</a></span>
+            <div *ngFor="let anmi of localitem" class="on-by-on">
+                <img src="{{anmi['institute_logo']}}">
+                <h5>{{anmi['institute_name']}}</h5>
+                <small style="display:block; text-align:center;"><a (click)=removelist(anmi)   style="color:#ff0000; cursor: pointer; ">Remove</a></small>
+            </div>
+
+         </div>
+    </div>
+    
+      
+      

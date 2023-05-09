@@ -1,0 +1,68 @@
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+     
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+   
+}
+ 
+
+ 
+[disabled]{
+  border: 1px solid #999999;
+  background-color: #E5E5E5;
+  color: #000;
+}
+
+.formsubtitle{ background-color: #E5E5E5; display: block; font-weight: 500; text-indent: 10px;}
+
+
+label{color: #666; margin-bottom: 0px;}
+.req{color: #ff0000;}
+
+input{ min-height: 40px!Important;}
+
+
+.radios{ padding: 0px;    margin: 0px;    float: none;    min-height: 0px;}
+
+
+.docsection{font-weight: bold; color: #666; background: #f1f1f1; text-indent: 5px;}
+
+.disabled.btn{ background-color: #ddd; border: 1px solid #777;}
+
+.active{color: #fff;    background-color: #0062cc;    border-color: #005cbf;}
+
+.float-r{float:right;}

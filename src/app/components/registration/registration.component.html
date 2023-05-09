@@ -1,0 +1,203 @@
+<!-- Start Register 
+    ============================================= -->
+<div class="container-fluid bg-gradient">
+    <div class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 my-5">
+                    <div class="login-box">
+                        <div class="login">
+                            <div class="content">
+                                <h3><b>Registration 2023</b></h3>
+                                <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm.value)" autocomplete="disabled" autocomplete="off">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <i class="fas fa-user"></i> <input class="form-control" required #name="ngModel" ngModel name="name"  placeholder="Enter Name*" type="text">
+                                                <span *ngIf="name.invalid && name.touched" class="text-danger smallalert">Please enter your name</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <i class="fas fa-envelope-open"></i> <input  class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required #email="ngModel"   ngModel name="email" placeholder="Enter Email*" type="email">
+                                                <span *ngIf="email.invalid && ((email.dirty || email.touched))  || email.errors?.pattern" class="text-danger smallalert">Please enter your email</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <i class="fa fa-mobile"></i> 
+                                                    <!-- <select class="form-control"   ngModel required #ccode="ngModel" name="ccode">
+                                                        <option value="">Select</option>
+                                                        <option value="India">India</option>
+                                                    </select> -->
+                                                <div>
+                                                        <!-- <select class="form-control"    ngModel required #ccode="ngModel" name="ccode">
+                                                            <option [value]="">Country</option>
+                                                            <option [value]="[India]">India</option>
+                                                        </select> -->
+                                                         
+                                                    <!-- <select ngModel required #country="ngModel" name="country" (ngModelChange)="onChange($event)">
+                                                        <option value="">Choose Country </option>
+                                                        <option *ngFor="let state of states"   [value]="state.country_name"> 
+                                                            {{ state.country_name }}
+                                                        </option>
+                                                    </select> -->
+
+
+                                                    <input ngModel required #country="ngModel"  required placeholder="Country Code" name="country" list="countrylist" [(ngModel)]="defcountry">                  
+                                                    <datalist id="countrylist">
+                                                    <option *ngFor="let country of countrylist" [value]="country.country_name">{{country.country_name}}</option>
+                                                    </datalist>
+                                                    <span *ngIf="country.invalid && ((country.dirty || country.touched))" class="text-danger smallalert">Enter Country Code</span>
+ 
+                                                </div>
+
+                                                   
+                                                <!-- <div *ngIf="mobile.touched">
+                                                    <span class="text-danger smallalert" *ngIf="mobile.errors?.required" pattern="[7-9]{1}[0-9]{9}" class="text-danger smallalert">Please enter mobile no.</span>
+                                                    <span *ngIf="mobile.invalid && ((mobile.touched &&  mobile.errors?.['minlength'])) || email.errors?.pattern" class="text-danger smallalert">Please enter 10 digit mobile no.</span>
+                                                  </div> -->
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="form-group">
+                                                <i class="fa fa-mobile"></i> <input class="form-control" ngModel required #mobile="ngModel" pattern="[7-9]{1}[0-9]{9}" name="mobile" minlength="10" maxlength="10"  placeholder="Enter Mobile No.*" type="tel">
+                                                <div *ngIf="mobile.touched">
+                                                    <span class="text-danger smallalert" *ngIf="mobile.errors?.required" class="text-danger smallalert">Please enter mobile no.</span>
+                                                    <span *ngIf="mobile.invalid && ((mobile.touched &&  mobile.errors?.['minlength']))  " class="text-danger smallalert">Please enter 10 digit mobile no.</span>
+                                                    <span class="text-danger smallalert" *ngIf="mobile.touched && mobile.errors?.pattern" class="text-danger smallalert">Enter Number only</span>
+                                                  </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <i class="fas fa-calendar"></i> <input class="form-control" ngModel required #dob="ngModel" type="date" name="dob"  placeholder="Date of Birth">
+                                                <span *ngIf="dob.invalid && ((dob.dirty || dob.touched))" class="text-danger smallalert">Select Date of Birth</span>
+                                                 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group pt-2">
+                                                <i class="fa fa-venus"></i> 
+                                                <!-- <select name="gender" ngModel required #gender="ngModel" class="form-control">
+                                                   <option value="" selected> Select Gender</option>
+                                                   <option *ngFor="let gender of genderlist" [ngValue]="gender.sign">{{gender.name}}</option>
+                                                </select> -->
+                                                <!-- <select required #gender="ngModel" ngModel name="gender"> 
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male" >Male</option>
+                                                    <option value="Female" >Female</option>
+                                                </select> -->
+                                                <!-- <select required #gender="ngModel" ngModel name="gender">
+                                                    <option value="" selected>Select Gender</option>
+                                                    <option value="Male" >Male</option>
+                                                    <option value="Female" >Female</option>
+                                                </select> -->
+                                               <span pb-3><input type="radio" class="radios" #gender="ngModel" ngModel required name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                               <span><input type="radio" class="radios"  #gender="ngModel" ngModel required name="gender" value="Female"> Female</span>
+                                               <span *ngIf="gender.errors?.required" class="text-danger smallalert">Select Gender</span>
+
+                                                
+ 
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <i class="fas fa-user"></i> <input class="form-control" ngModel required #father="ngModel" type="text" name="father" placeholder="Father's Name">
+                                                <span *ngIf="father.invalid && father.touched" class="text-danger smallalert">Enter Father's Name</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <i class="fas fa-user"></i> <input class="form-control" ngModel required #mother="ngModel" type="text" name="mother" placeholder="Mother's Name">
+                                                <span *ngIf="mother.invalid && mother.touched" class="text-danger smallalert">Enter Mother's Name</span>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <i class="fa fa-building"></i> <input class="form-control" ngModel required #city="ngModel" type="text" name="city" placeholder="Enter City Name">
+                                                <span *ngIf="city.invalid && city.touched" class="text-danger smallalert">Enter City Name</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <i class="fa fa-building"></i> <input class="form-control" ngModel required #state="ngModel" type="text" name="state" placeholder="Enter State Name">
+                                                <span *ngIf="state.invalid && state.touched" class="text-danger smallalert">Enter State Name</span> 
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+
+                                    <!-- <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <i class="fas fa-lock"></i> <input class="form-control" ngModel required #password="ngModel" minlength="6" name="password" placeholder="Password*" type="password">
+                                                <span *ngIf="password.invalid && password.touched && password.errors?.['minlength']" class="text-danger smallalert">Please enter atleast 6 digit password</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <i class="fas fa-lock"></i> <input class="form-control" ngModel required #cpassword="ngModel" minlength="6"   name="cpassword" placeholder="Confirm Password*" type="password">
+                                                <span *ngIf="cpassword.invalid && cpassword.touched" class="text-danger smallalert">Please re-enter password</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="row">
+                                            <button type="submit" [disabled]="registrationForm.invalid"> Register Now </button>
+                                            <input type="hidden" name="collegeurl" [(ngModel)]="collegeurl" />
+                                            <input type="hidden" name="courseid" [(ngModel)]="courseid" />                                           
+                                            <input type="hidden" name="e_id" [(ngModel)]="e_id" />                                           
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                
+
+
+                                <div class="sign-up">
+                                    <p>
+                                        Already have an account?? <a routerLink="/login"> Login Now</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Register -->
+</div>
+
+

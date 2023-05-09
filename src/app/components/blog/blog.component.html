@@ -1,0 +1,55 @@
+<!-- Start Breadcrumb 
+    ============================================= -->
+    <div class="breadcrumb-area bg-gray text-center shadow dark text-light bg-cover" style="background-image: url(https://validthemes.online/themeforest/edukat/assets/img/banner/26.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>Blog/ Article</h1>
+                    <ul class="breadcrumb">
+                        <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
+                        <li class="active">Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Blog
+    ============================================= -->
+    <div class="blog-area default-padding">
+        <div class="container">
+            <div class="blog-items">
+                <div class="blog-content">
+                    <div class="blog-item-box">
+                        <div class="row">
+                            <!-- Single Item -->
+                            <div class="col-lg-4 col-md-6 single-item" *ngFor="let blog of myblogs">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <a routerLink="{{blog['nr_front_url']}}"><img src="{{blog['nr_image']}}" alt="Thumb"></a>
+                                        <div class="date">
+                                            <strong>{{blog['nr_publish_date'] | date:'dd'}} </strong> {{blog['nr_publish_date'] | date:'MMMM'}}
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="htext"><a routerLink="{{blog['nr_front_url']}}">{{blog['nr_title']}}</a></h4>
+                                        <p class="ptext">
+                                            {{blog['nr_description']}} 
+                                        </p>
+                                    </div>
+                                    <div class="bottom-info">
+                                        <a class="btn-more" routerLink="{{blog['nr_front_url']}}">Read More <i class="arrow_right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Item -->
+                        </div>
+                        
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog -->

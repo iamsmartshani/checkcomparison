@@ -2,12 +2,146 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Check</title>
+  <title>Kolleges</title>
+  
+<meta name="description" content="">
+<meta name="keywords" content="">
+
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+ 
+ 
+    <!-- Template Main CSS File -->
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" class="mainplugin" /> -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" class="mainplugin"  />
+    <link href="assets/css/themify-icons.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/flaticon-set.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/magnific-popup.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/owl.theme.default.min.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/animate.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/bootsnav.css" rel="stylesheet" class="mainplugin" />
+    <link href="assets/css/responsive.css" rel="stylesheet"  class="mainplugin"/>
+    <link href="assets/css/style.css" rel="stylesheet" class="mainplugin">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/student-dashboard/css/style.css" class="studentpan">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" class="studentpan">
+
+    
+    
+ 
+  
+  <!-- ========== End Stylesheet ========== -->
+  
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+ 
+   
+  <!-- ========== Google Fonts ========== -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap"rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
+
+  <span class="output"></span>
+     
   <app-root></app-root>
+
+
+  <!-- jQuery Frameworks
+    ============================================= -->
+     
+
+  <script src="assets/js/jquery-1.12.4.min.js" class="mainplugin"></script>
+  <script src="assets/js/popper.min.js" class="mainplugin"></script>
+  <script src="assets/js/bootstrap.min.js" class="mainplugin"></script>
+  <script src="assets/js/jquery.appear.js" class="mainplugin"></script>
+  <script src="assets/js/jquery.easing.min.js" class="mainplugin"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js" class="mainplugin"></script>
+  <script src="assets/js/modernizr.custom.13711.js" class="mainplugin"></script>
+  <script src="assets/js/wow.min.js" class="mainplugin"></script>
+  <script src="assets/js/progress-bar.min.js" class="mainplugin"></script>
+  <script src="assets/js/isotope.pkgd.min.js" class="mainplugin"></script>
+  <script src="assets/js/imagesloaded.pkgd.min.js" class="mainplugin"></script>
+  <script src="assets/js/count-to.js" class="mainplugin"></script>
+  <script src="assets/js/YTPlayer.min.js" class="mainplugin"></script>
+  <script src="assets/js/jquery.nice-select.min.js" class="mainplugin"></script>
+  <script src="assets/js/loopcounter.js" class="mainplugin"></script>
+  <script src="assets/js/bootsnav.js" class="mainplugin"></script>
+  <script src="assets/js/main.js" class="mainplugin"></script>
+
+  <!------------------------ This is multiple select box  plugin-------->
+  <link href="assets/css/fSelect.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="assets/js/fSelect.js"></script>
+  <script>
+    (function ($) {
+      $(function () {
+        window.fs_test = $('.test').fSelect();
+      });
+    })(jQuery);
+  </script>
+  <!------------------------ This is multiple select box plugin end ----------->
+  <script>
+
+    function getopen() {
+      $(".modal-nodes").show();
+    }
+
+    function closemd() {
+      $(".modal-nodes").hide();
+    }      
+  </script>
+
+
+
+  <script>
+    function createGeneralFrontUrl(updateFrom, updateTo, replaceFactor) {
+      var page_name = document.getElementById(updateFrom).value;
+      var re = /[\'\\\"~`!@#$%*()=&{};':",.<>?|+^\[\]\/]+/g;
+      var url = page_name.replace(re, "");
+      var res = / +/g;
+      var url = url.replace(res, replaceFactor);
+      document.getElementById(updateTo).value = url.toLowerCase();
+      $('#blogurl').addClass('ng-touched');
+      $('#blogurl').removeClass('ng-untouched');
+      $('#blogurl').addClass('ng-valid');
+      $('#blogurl').addClass('ng-dirty');
+    }
+  </script>
+ 
+
+
+  
+ 
+<script>
+  
+  str= $(location).attr('href');
+  arr = str.split('/');
+  // console.warn("shani",arr[3])
+
+  if(arr[3]=='admin')
+  {
+    $(".mainplugin").prop("disabled",false);
+  }
+  else if(arr[3]=='student-dashboard')
+  {
+    $(".mainplugin").prop("disabled",true);
+    $(".studentpan").prop("disabled",false);
+  }
+  else
+  {
+    $(".mainplugin").prop("disabled",false);
+    $(".studentpan").prop("disabled",true);
+  }
+  </script>
+ 
 </body>
+
 </html>
+
+

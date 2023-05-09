@@ -1,0 +1,573 @@
+<div *ngFor="let info of allinfo" class="detailslot bg-gray shadow dark text-light bg-cover">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1 logo"><img src="{{info['institute_logo']}}"></div>
+            <div class="col-lg-11">
+                <h2>{{info['institute_name']}}</h2>
+                <ul class="othinfo">
+                    <li><i class="fa fa-map-marker"></i> {{info['city']}}, {{info['state']}}</li>
+                    <li><i class="fa fa-university"></i> Affiliated to {{info['affiliated']}}</li>
+                    <li><i class="fa fa-star"></i> {{info['college_type']}} University</li>
+                    <li><i class="fa fa-history"></i> Estd {{info['establish']}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb -->
+
+
+
+
+<!-- Start Course Details 
+============================================= -->
+<div *ngFor="let info of allinfo" class="course-details-area default-padding" style="padding-bottom: 0px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 info">
+                  
+                <div class="top-info">
+
+                    <div class="single-shadow">
+                        <h3><b>About {{info['institute_name']}}</b></h3>
+                        <hr />
+                        <!-- <div class="about-txt" [innerHTML]="info['about_institute']"></div> -->
+
+
+                        <div class="about-txt" [ngClass]="{'limitTextHeight': isReadMore}" [innerHTML]="info['about_institute']">
+
+                            
+                        </div>
+                        <button type="button" (click)="showText()" class="lesmorbtn">
+                            {{ isReadMore ? 'Show me more >>': 'Show me less' }}
+                          </button>
+
+                    </div>
+                       
+                     
+                    <div class="single-shadow" id="courses" *ngIf="collegecourse.length > 0">
+                        <h3><b>{{info['institute_name']}} Courses & Fee</b></h3>
+                        <hr />
+                        <div class="all_courses">
+                            <div class="course-single" *ngFor="let course of collegecourse">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 style="margin-bottom:5px"><b>{{course[3]}}</b></h4>
+                                        <span class="specializ">{{course[4]}}</span>
+                                        <small class="silent">{{course[10]}}</small>
+                                    </div>
+                                    <div class="col-md-3"> &nbsp; </div>
+                                    <div class="col-md-3">
+                                        <h5><b><span [innerHTML]="currency"></span>{{course[9]}} /{{course[6]}}</b></h5>
+                                        <!-- <a routerLink="/registration/{{info['institute_url']}}/{{course[0]}}" class="btn btn-theme effect btn-sm">Apply Now</a> -->
+                                        <!-- <a [routerLink]="['/registration/']" [queryParams]="{url: info['institute_url'], course: course[0], e_id:info['e_id']}" class="btn btn-theme effect btn-sm">Apply Now</a> -->
+
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalLong"
+                                            class="btn-primary text-light effect btn-sm" (click)="myFunc(course[0],course[3],course[4])">Apply Now</a>
+
+                                             
+                                    </div>
+                                    <div class="col-md-12">
+                                        <small class="red"><i class="fa fa-clock" aria-hidden="true"></i>
+                                            Duration:{{course[5]}} {{course[6]}}</small>
+                                        <small class="sea"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                            Level:{{course[8]}}</small>
+                                        <small class="mode"><i class="fa fa-book-open" aria-hidden="true"></i>
+                                            Mode:{{course[7]}}</small>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="single-shadow min-ht">
+                        <h3><b>{{info['institute_name']}} Facilities</b></h3>
+                        <hr />
+                        <div class="facilities">
+                            <div class="confacl" *ngFor="let faciliti of facility">
+                                <div class="confacl-icn"><img
+                                        src="http://127.0.0.1:5000/static/assets/facility/{{faciliti[2]}}"></div>
+                                <div class="confacl-text">{{faciliti[1]}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-shadow  facilities-area default-padding"
+                        *ngIf="boyhostel.length > 0 || girlhostel.length > 0 ">
+                        <h3><b>{{info['institute_name']}} Hostel & fee</b></h3>
+                        <hr />
+                        <div class="col-lg-12 info">
+                            <div class="content-box" style="padding: 0; box-shadow:none; border-bottom:0;">
+                                <div class="facilities-items mt-2 row">
+                                    <div class="item col-md-6">
+                                        <div class="icon">
+                                            <img src="assets/img/hostel.jpg" alt="Thumb">
+                                            <i class="fa fa-male"></i>
+                                        </div>
+                                        <div class="info">
+                                            <h4>Boys Hotel</h4>
+                                            <ul *ngFor="let bohstel of boyhostel">
+                                                <li><b>{{bohstel}}</b></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item col-md-6">
+                                        <div class="icon">
+                                            <img src="assets/img/hostel.jpg" alt="Thumb">
+                                            <i class="fa fa-female"></i>
+                                        </div>
+                                        <div class="info">
+                                            <h4>Girls Hotel</h4>
+                                            <ul *ngFor="let ghostel of girlhostel">
+                                                <li><b>{{ghostel}}</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-shadow" *ngIf="awards.length > 0">
+                        <h3><b>{{info['institute_name']}} Ranking & Awards</b></h3>
+                        <hr />
+                        <div class="ranking-awd" *ngFor="let award of awards">
+                            <div class="singl_award">
+                                <h1><i class="fa fa-trophy" style="font-size: 30px;"></i></h1>
+                                <div class="award-seprate">
+                                    <h2 [innerHTML]="award[0]"></h2>
+                                    <p *ngIf="award[1]" [innerHTML]="award[1]"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="single-shadow" *ngIf="allplacements.length > 0">
+                        <h3><b>{{info['institute_name']}} Placement Companies</b></h3>
+                        <hr />
+                        <div class="myplacement">
+                            <div class="placement">
+                                <ul *ngFor="let place of allplacements">
+                                    <li><img src="https://www.allschoolscolleges.com/images/company_logo/{{place[2]}}"
+                                            alt="{{place[1]}}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!---- col-md-8 end here-->
+
+            <div class="col-lg-4 sidebar">
+                <!-- Single Item -->
+                <div class="item course-preview">
+                    <div class="content">
+                        <a
+                        data-toggle="modal" data-target="#exampleModalLong"
+                                            class="btn btn-theme effect btn-sm" 
+                        class="btn btn-theme effect btn-sm">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Single Item -->
+
+                <!-- Single Item -->
+                <div class="item course-category">
+                    <div class="content">
+                        <h4>Course categories</h4>
+                        <ul>
+                            <li>
+                                <a routerLink="/medical-colleges">Medical College</a>
+                            </li>
+                            
+                            <li>
+                                <a routerLink="/engineering-colleges">Engineering College </a>
+                            </li>
+                            <li>
+                                <a routerLink="/paramedical-colleges">Paramedical College</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+
+                <!-- Single Item -->
+                <div class="item related-course">
+                    <div class="content">
+                        <h4>Related Courses</h4>
+                        <div class="related-courses-items">
+                            <div class="item">
+                                <div class="content">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="{{info['institute_logo']}}" alt="Thumb">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <h5>
+                                            <a href="#">How to Make Beautiful Landscape photos?</a>
+                                        </h5>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5 (1.3k)</span>
+                                        </div>
+                                        <div class="meta">
+                                            <i class="fas fa-user"></i> By <a href="#">Tami Bua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="content">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="{{info['institute_logo']}}" alt="Thumb">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <h5>
+                                            <a href="#">Learn PHP Programming From Scratch</a>
+                                        </h5>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5 (6k)</span>
+                                        </div>
+                                        <div class="meta">
+                                            <i class="fas fa-user"></i> By <a href="#">John Bro</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="content">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="{{info['institute_logo']}}" alt="Thumb">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <h5>
+                                            <a href="#">Profession paython learing</a>
+                                        </h5>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5 (23k)</span>
+                                        </div>
+                                        <div class="meta">
+                                            <i class="fas fa-user"></i> By <a href="#">Spany Paul</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="gallery-area col-md-8" *ngIf="collegepics.length > 0">
+    <div class="gallery-view" *ngFor="let info of allinfo">
+        <h3><b>{{info['institute_name']}} Campus Tour</b></h3>
+        <hr />
+        <div class="container">
+            <div class="magnific-mix-gallery masonary">
+                <div id="portfolio-grid" class="gallery-items colums-3">
+                    <!-- Single Item -->
+                    <div class="pf-item" *ngFor="let pic of collegepics[0]">
+                        <div class="item-inner">
+                            <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic}}" alt="Thumb">
+                            <div class="effect-info">
+                                <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic}}"
+                                    class="item popup-link">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- <div class="pf-item">
+                    <div class="item-inner">
+                        <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic2}}" alt="Thumb">
+                        <div class="effect-info">
+                            <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic2}}" class="item popup-link">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pf-item">
+                    <div class="item-inner">
+                        <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic3}}" alt="Thumb">
+                        <div class="effect-info">
+                            <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic3}}" class="item popup-link">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                    <!--  <div class="pf-item">
+                    <div class="item-inner">
+                        <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic4}}" alt="Thumb">
+                        <div class="effect-info">
+                            <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic4}}" class="item popup-link">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pf-item">
+                    <div class="item-inner">
+                        <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic5}}" alt="Thumb">
+                        <div class="effect-info">
+                            <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic5}}" class="item popup-link">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pf-item">
+                    <div class="item-inner">
+                        <img src="https://www.allschoolscolleges.com/images/college_photo/{{pic6}}" alt="Thumb">
+                        <div class="effect-info">
+                            <a href="https://www.allschoolscolleges.com/images/college_photo/{{pic6}}" class="item popup-link">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                    <!-- End Single Item -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close d-flex align-items-center justify-content-center"
+                    data-dismiss="modal" aria-label="Close">
+                    <!-- <span aria-hidden="true" class="ion-ios-close"></span> -->
+                    <i class="fa fa-window-close text-dark"></i>
+                </button>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-md-4 d-flex">
+                    <div class="modal-body p-5 img d-flex color-1 text-center d-flex align-items-center">
+                        <div class="text w-100">
+                            <span><img class="pb-1" src="assets/img/logo.png"></span>
+
+                            <h3>Why register with us?</h3>
+                            <ul class="whyul">
+                                <li>Get updates on Cut-offs, Placements, Rankings</li>
+                                <li>Never miss your admission deadlines</li>
+                                <li>Know what others have to say about the college you are searching</li>
+                                <li>You won’t get unwanted calls from third parties</li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-8 d-flex" *ngIf="isloggedin===false">
+                    <div class="modal-body p-3 img d-flex align-items-center color-2">
+                        <div class="text w-100 py-0 py-md-5">
+                                <h3 class="mb-0 pb-0">Register Now To Apply</h3>
+                                <h5 class="pt-1" style="color: #01a1a1;">{{collegename}}</h5>
+                            <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm.value)" autocomplete="disabled" autocomplete="off">
+                            <div class="row">
+                                
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="label" for="name">Full Name <b>*</b> </label>
+                                        <input type="text" required #name="ngModel" ngModel name="name" class="form-control">
+                                        <span *ngIf="name.invalid && name.touched" class="text-danger smallalert">Please enter your name</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="label" for="email">Email Address <b>*</b></label>
+                                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required #email="ngModel"   ngModel name="email"  class="form-control">
+                                        <span *ngIf="email.invalid && ((email.dirty || email.touched))  || email.errors?.pattern" class="text-danger smallalert">Please enter your email</span>
+                                    </div>
+                                </div>
+ 
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <div class="row">
+                                            <div class="col-md-4 pr-0">
+                                                <label class="label" for="email">Code <b>*</b></label>
+                                                <input type="text" class="form-control"   ngModel required #country="ngModel"  required name="country" list="countrylist">
+                                                <datalist id="countrylist">
+                                                    <option *ngFor="let country of countrylist" [value]="country.country_name">{{country.country_name}}</option>
+                                                </datalist>
+                                                <span *ngIf="country.invalid && ((country.dirty || country.touched))" class="text-danger smallalert">Enter Country Code</span>
+                                            </div>
+                                            <div class="col-md-8 pl-1">
+                                                <label class="label" for="email">Email Mobile No <b>*</b></label>
+                                                <input type="tel" class="form-control" ngModel required #mobile="ngModel" pattern="[7-9]{1}[0-9]{9}" name="mobile" minlength="10" maxlength="10">
+                                                <div *ngIf="mobile.touched">
+                                                    <span class="text-danger smallalert" *ngIf="mobile.errors?.required" class="text-danger smallalert">Please enter mobile no.</span>
+                                                    <span *ngIf="mobile.invalid && ((mobile.touched &&  mobile.errors?.['minlength']))  " class="text-danger smallalert">Please enter 10 digit mobile no.</span>
+                                                    <span class="text-danger smallalert" *ngIf="mobile.touched && mobile.errors?.pattern" class="text-danger smallalert">Enter Number only</span>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="label" for="password">City Name <b>*</b></label>
+                                        <input type="text" class="form-control" ngModel required #city="ngModel" type="text" name="city">
+                                        <span *ngIf="city.invalid && city.touched" class="text-danger smallalert">Enter City Name</span> 
+                                    </div>
+                                </div>
+                           
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="label" for="course">Course interested in <b>*</b></label>
+                                          <input  type="text" class="form-control"  [(ngModel)]="coursename"   ngModel required #course="ngModel"  required name="course" list="courselist">
+                                          <datalist id="courselist">
+                                              <option *ngFor="let allcourse of collegecourse">{{allcourse[3]}} [{{allcourse[4]}}]</option>
+                                          </datalist>
+                                        <span *ngIf="course.invalid && course.touched" class="text-danger smallalert">Enter Course</span> 
+                                    </div>
+                                </div>
+
+                                                                        
+ 
+
+                                <div class="col-md-6">
+                                    <div class="form-group d-md-flex">
+                                        <div class="form-check w-100 text-left">
+                                            <label class="custom-control fill-checkbox">
+                                                <span class="fill-control-description">By submitting this form, you accept and agree to our <a href="#">Terms of Use</a>.</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="courseid" [(ngModel)]="courseid" />  
+                                <input type="hidden" name="e_id" [(ngModel)]="e_id" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="submit" [disabled]="registrationForm.invalid" class="form-control btn btn-primary rounded submit px-3">Sign
+                                            Up</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            <a href="#">I'm already a member</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 d-flex"  *ngIf="isloggedin===true">
+                    <div class="modal-body p-3 img d-flex align-items-center color-2">
+                        <div class="text w-100 py-0 py-md-5">
+                                <h3 class="mb-0 pb-0">Register Now To Apply</h3>
+                                <h5 class="pt-1" style="color: #01a1a1;">{{collegename}}</h5>
+                            <form #courseapply="ngForm" (ngSubmit)="applyforcourse(courseapply.value)" autocomplete="disabled" autocomplete="off">
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="label" for="course">Course interested in <b>*</b></label>
+                                          <input type="text" class="form-control" readonly [(ngModel)]="coursename"   ngModel required #course="ngModel"  required name="course" list="courselist">
+                                          <!-- <datalist id="courselist">
+                                              <option *ngFor="let allcourse of collegecourse">{{allcourse[3]}} [{{allcourse[4]}}]</option>
+                                          </datalist> -->
+                                        <span *ngIf="course.invalid && course.touched" class="text-danger smallalert">Enter Course</span> 
+                                    </div>
+                                </div>
+
+                                                                        
+ 
+
+                                <div class="col-md-6">
+                                    <div class="form-group d-md-flex">
+                                        <div class="form-check w-100 text-left">
+                                            <label class="custom-control fill-checkbox">
+                                                <span class="fill-control-description">By submitting this form, you accept and agree to our <a href="#">Terms of Use</a>.</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="courseid" [(ngModel)]="courseid" />  
+                                <input type="hidden" name="e_id" [(ngModel)]="e_id" />
+                                <input type="hidden" name="usid" [(ngModel)]="userid['id']" />
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="submit" [disabled]="courseapply.invalid" class="form-control btn btn-primary rounded submit px-3">Submit & apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-----signup end here-->
+
+
+
+ 

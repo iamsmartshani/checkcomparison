@@ -1,0 +1,67 @@
+<div class="wrapper d-flex align-items-stretch">
+    <app-header></app-header>
+    <div id="content" class="p-4 p-md-5 pt-5 shadow">
+
+        <div class="page-wrapper">
+            <div class="page-content">
+                <h2 class="mb-4">Your Applied college(s)</h2>
+
+
+
+
+                <div class="card radius-10">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                         
+                                        <th>#</th>
+                                        <th>College Name</th>
+                                        <th>Course</th>
+                                        <th>City</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+ 
+                                    <tr class="alert" role="alert" *ngFor="let lists of cmf">
+                                        <td>
+                                            <div class="img" style="width: 70px;"><img src="{{lists['institute_logo']}}"></div></td>
+                                        <td class="d-flex align-items-center">
+                                            <div class="pl-3 email">
+                                                <span>{{lists['institute_name']}}</span>
+                                            </div>
+                                        </td>
+                                        <td>{{lists['course_name']}} [{{lists['specialization']}}]</td>
+                                        <td>{{lists['city']}}</td>
+                                        <td class="status">
+                                            <button *ngIf="lists['step']===4" type="button" class="btn-sm btn-success"><i class="fa fa-check"></i> Completed</button>
+                                            <button *ngIf="lists['step']!==4" (click)="currentapplyform(lists['id'],lists['institute_name'], lists['course_name'] + ' [' + lists['specialization']+']')" class="btn-sm btn-primary">In Proceed ...</button>
+                                        </td> 
+                                        <td>
+                                            <button type="button" (click)="removecollege(lists['id'])">
+                                                <span aria-hidden="true"><i class="fa fa-trash-o" style="font-size:16px"></i></span>
+                                            </button>
+                                            
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

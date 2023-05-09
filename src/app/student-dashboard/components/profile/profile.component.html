@@ -1,0 +1,110 @@
+<div class="wrapper d-flex align-items-stretch">
+    <app-header></app-header>
+    
+    <div id="content" class="p-4 p-md-5 pt-5 shadow">  
+        <div class="page-wrapper">
+            <div class="page-content">
+                <h2 class="mb-4">Profile</h2>
+                <div class="card radius-10">
+                    
+                    <div class="card-body">
+
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="message">
+                            <strong>Success</strong> Profile Updated Successfully.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form #userform="ngForm" (ngSubmit)="updateuser(userform.value)" autocomplete="disabled" autocomplete="off">
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" required #fullname="ngModel" ngModel name="fullname"  placeholder="Enter Name*" class="form-control" [(ngModel)]="info[0]['fullname']" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input disabled type="email" required #email="ngModel" ngModel name="email"  placeholder="Enter Email*" class="form-control" [(ngModel)]="info[0]['email']" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Mobile</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">                                
+                                <input type="text" required #countrycode="ngModel" ngModel name="countrycode"  placeholder="Country Code*" class="form-control" [(ngModel)]="info[0]['mob_code']" />
+                            </div>
+                            <div class="col-sm-7 text-secondary">
+                                <input type="tel" required #mobile="ngModel" ngModel name="mobile" minlength="10" maxlength="10"  placeholder="Enter Mobile No.*" class="form-control" [(ngModel)]="info[0]['mobile']" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Date of Birth</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="date" required #dob="ngModel" ngModel name="dob" placeholder="Date of Birth*" class="form-control" [(ngModel)]="info[0]['dob']" />
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Father</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" required #father="ngModel" ngModel name="father" placeholder="Father's Name*" class="form-control" [(ngModel)]="info[0]['father']" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Mother</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" required #mother="ngModel" ngModel name="mother" placeholder="Mother's Name*" class="form-control" [(ngModel)]="info[0]['mother']" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">City</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" required #city="ngModel" ngModel name="city" placeholder="City Name*" class="form-control" [(ngModel)]="info[0]['city']" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">State</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" required #state="ngModel" ngModel name="state" placeholder="State Name*" class="form-control" [(ngModel)]="info[0]['state']" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="submit" class="btn btn-primary px-4" value="Save Changes" />
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

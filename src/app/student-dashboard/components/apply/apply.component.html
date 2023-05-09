@@ -1,0 +1,883 @@
+<div class="wrapper d-flex align-items-stretch">
+    <app-header></app-header>
+    
+    <div id="content" class="p-4 p-md-5 pt-5 shadow">  
+        <div class="page-wrapper">
+            <div class="page-content">
+                <h2 class="mb-4">Apply Now</h2>
+                <div class="card radius-10">
+                     
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="wrapper">
+                                    <div class="row no-gutters">
+
+                                        <div class="w-100 pr-5 mt-2 pl-5">
+                                            <!-- <div class="row">
+                                                <div class="col-md-6">
+                                                    <input type="text" disabled class="form-control" [(ngModel)]="appearcollege">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" disabled class="form-control" [(ngModel)]="appearcourse">
+                                                </div>
+                                            </div> -->
+                                            <div class="row">
+                                                <div class="col-md-12 text-center"><h4>Apply for <strong>{{appearcourse}}</strong> in <strong>{{appearcollege}}</strong> College</h4></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12 col-md-7 order-md-last d-flex align-items-stretch">
+
+                                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                                <div id="form-message-warning" class="mb-4"></div> 
+                                            <!-- <div id="form-message-success" class="mb-4">
+                                            Your message was sent, thank you!
+                                            </div> -->
+
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="message">
+                                                <strong>Success</strong> Profile Updated Successfully.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                             
+                                            
+ 
+ 
+
+                                            <div class="stepwizard col-md-offset-3">
+                                                <div class="stepwizard-row setup-panel">
+                                                  <div class="stepwizard-step">
+                                                    <a href="#" class="btn btn-default btn-circle" [ngClass]="currentstep === 1 ? 'active' : 'disabled'">1</a>
+                                                    <p>Personal Details</p>
+                                                  </div>
+                                                  <div class="stepwizard-step">
+                                                    <a href="#" class="btn btn-default btn-circle"  [ngClass]="currentstep === 2 ? 'active' : 'disabled'">2</a>
+                                                    <p>Parent / Communication Details</p>
+                                                  </div>
+                                                  <div class="stepwizard-step">
+                                                    <a href="#" class="btn btn-default btn-circle" [ngClass]="currentstep === 3 ? 'active' : 'disabled'">3</a>
+                                                    <p>Academic Details</p>
+                                                  </div>
+                                                  <div class="stepwizard-step">
+                                                    <a href="#" class="btn btn-default btn-circle" [ngClass]="currentstep === 4 ? 'active' : 'disabled'">4</a>
+                                                    <p>Upload Document</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- {{currentstep}} -->
+                                                
+                                           
+                                                    
+                                                    <div id="step1" *ngIf="currentstep === 1">
+                                                        <form #application="ngForm" (ngSubmit)="apply(application.value)" autocomplete="disabled" autocomplete="off" class="contactForm">
+                                                            <input type="hidden" name="id" [(ngModel)]="currentformid" />
+                                                            <input type="hidden" name="currentstepval" [(ngModel)]="currentstep" />
+                                                        <div class="pl-0 pb-2">
+                                                            <h4 class="formsubtitle">Personal Details</h4>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Title <span class="req">*</span></label>
+                                                                    <!-- <input type="text" list="titielist" class="form-control" required #title="ngModel" ngModel name="title" [(ngModel)]="info[0]['title']">
+                                                                    <datalist id="titielist">
+                                                                        <option value="Mr">Mr</option>
+                                                                        <option value="Ms">Ms</option>
+                                                                        <option value="Mrs">Mrs</option>
+                                                                    </datalist> -->
+                                                                    
+                                                                    <select class="form-control browser-default custom-select" required #title="ngModel" ngModel name="title" [(ngModel)]="info[0]['title']">
+                                                                        <option disabled value="">Select Title</option>
+                                                                        <option value="Mr" [selected]="info[0]['title']  == 'Mr'">Mr</option>
+                                                                        <option value="Ms" [selected]="info[0]['title']  == 'Ms'">Ms</option>
+                                                                        <option value="Mrs" [selected]="info[0]['title']  == 'Mrs'"  >Mrs</option>
+                                                                    </select>
+
+                                                                    <span *ngIf="title.invalid && ((title.dirty || title.touched))" class="text-danger smallalert">Select title</span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- info[0]['fullname'] -->
+                                                            <div class="col-md-4"> 
+                                                                <div class="form-group">
+                                                                    <label class="label" for="fullname">Full Name <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" ngModel required #fullname="ngModel"  name="fullname"  placeholder="Your Full Name" [(ngModel)]="info[0]['fullname']">
+                                                                    <span *ngIf="fullname.invalid && fullname.touched" class="text-danger smallalert">Please enter your name</span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- info[0]['email'] -->
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="email">Email Id <span class="req">*</span></label>
+                                                                    <input type="email" class="form-control" ngModel required #email="ngModel"  name="email" readonly  placeholder="Your Email Id" [(ngModel)]="emailids">
+                                                                    <span *ngIf="email.invalid && ((email.dirty || email.touched))  || email.errors?.pattern" class="text-danger smallalert">Please enter your email</span>
+                                                                </div>
+                                                            </div>
+
+
+                                                                 
+
+                                                            <div class="col-md-2 pr-0">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="country">Country Code <span class="req">*</span></label>
+                                                                    <!-- <input type="tel" class="form-control" list="countrylist" ngModel required #country="ngModel" readonly  name="country" [(ngModel)]="ccode">
+                                                                    <datalist id="countrylist">
+                                                                        <option *ngFor="let country of countrylist" [value]="country.country_name">{{country.country_name}}</option>
+                                                                    </datalist> -->
+
+                                                                <select [(ngModel)]="ccode" #country="ngModel"  name="country" class="form-control browser-default custom-select"  required readonly >
+                                                                <option *ngFor="let country of countrylist" [value]="country.country_name" [selected]="country.country_name  == ccode">{{country.country_name}}</option>
+                                                                </select>
+
+                                                                    <!-- <span *ngIf="country.invalid && ((country.dirty || country.touched))" class="text-danger smallalert">Country Code</span> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2 pl-1">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="mobile">Mobile No. <span class="req">*</span></label>
+                                                                    <input type="tel" class="form-control" ngModel required #mobile="ngModel" pattern="[7-9]{1}[0-9]{9}"  name="mobile" readonly minlength="10" maxlength="12"  placeholder="Your Mobile No." [(ngModel)]="mobileno">
+                                                                    <div *ngIf="mobile.touched">
+                                                                        <span class="text-danger smallalert" *ngIf="mobile.errors?.required" class="text-danger smallalert">Please enter mobile no.</span>
+                                                                        <span *ngIf="mobile.invalid && ((mobile.touched &&  mobile.errors?.['minlength']))  " class="text-danger smallalert">Please enter 10 digit mobile no.</span>
+                                                                        <span class="text-danger smallalert" *ngIf="mobile.touched && mobile.errors?.pattern" class="text-danger smallalert">Enter Number only</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="mobile">Date of Birth <span class="req">*</span></label>
+                                                                    <input type="date" class="form-control" type="date" required #dob="ngModel" ngModel name="dob" placeholder="Date of Birth*" [(ngModel)]="info[0]['dob']">
+                                                                    <span *ngIf="dob.invalid && ((dob.dirty || dob.touched))" class="text-danger smallalert">Select Date of Birth</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="mobile">Gender <span class="req">*</span></label>
+                                                                    <select class="form-control browser-default custom-select" required #gender="ngModel"  [(ngModel)]="info[0]['gender']"  ngModel name="gender">
+                                                                        <option disabled value="">Select Gender</option>
+                                                                        <option value="Male" [selected]="info[0]['gender']  == 'Male'">Male</option>
+                                                                        <option value="Female" [selected]="info[0]['gender']  == 'Female'">Female</option>
+                                                                    </select>
+                                                                    <span *ngIf="gender.invalid && ((gender.dirty || gender.touched))" class="text-danger smallalert">Select Gender</span>
+                                                                </div>
+                                                            </div>
+    
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="mobile">Caste Category <span class="req">*</span></label>
+                                                                    <select type="text" class="form-control browser-default custom-select" required #caste="ngModel" ngModel name="caste" [(ngModel)]="info[0]['caste']">
+                                                                        <option disabled value="">Select Category</option>
+                                                                        <option value="General" [selected]="info[0]['gender']  == 'General'">General</option>
+                                                                        <option value="OBC" [selected]="info[0]['gender']  == 'OBC'">OBC</option>
+                                                                        <option value="SC" [selected]="info[0]['gender']  == 'SC'">SC</option>
+                                                                        <option value="ST" [selected]="info[0]['gender']  == 'ST'">ST</option>
+                                                                    </select>
+                                                                     
+                                                                    <span *ngIf="caste.invalid && ((caste.dirty || caste.touched))" class="text-danger smallalert">Select Caste Category</span>
+                                                                </div>
+                                                            </div>
+
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="physical">Are You Differently Abled ? <span class="req">*</span></label>
+                                                                    <select class="form-control" required #physical="ngModel" ngModel name="physical"  [(ngModel)]="info[0]['physically_disabled']">
+                                                                        <option disabled value="">Select Option</option>
+                                                                        <option value="No">No</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                    </select>
+                                                                    <span *ngIf="physical.invalid && ((physical.dirty || physical.touched))" class="text-danger smallalert">Select one</span>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="mobile">Religion</label>
+                                                                    <select type="text" class="form-control" #religion="ngModel" ngModel name="religion" [(ngModel)]="info[0]['religion']">
+                                                                        <option disabled value="">Select Religion</option>
+                                                                        <option value="AGNOSTIC">AGNOSTIC</option>
+                                                                        <option value="ATHEIST">ATHEIST</option>
+                                                                        <option value="BUDDHISM">BUDDHISM</option>
+                                                                        <option value="CHRISTIANITY">CHRISTIANITY</option>
+                                                                        <option value="HINDUISM">HINDUISM</option>
+                                                                        <option value="ISLAM">ISLAM</option>
+                                                                        <option value="JAINISM">JAINISM</option>
+                                                                        <option value="JUDAISM">JUDAISM</option>
+                                                                        <option value="NEO-PAGANISM">NEO-PAGANISM</option>
+                                                                        <option value="NON-RELIGIOUS">NON-RELIGIOUS</option>
+                                                                        <option value="PRIMAL-INDIGENOUS">PRIMAL-INDIGENOUS</option>
+                                                                        <option value="RASTAFARIANISM">RASTAFARIANISM</option>
+                                                                        <option value="SECULAR">SECULAR</option>
+                                                                        <option value="SHINTO">SHINTO</option>
+                                                                        <option value="SIKHISM">SIKHISM</option>
+                                                                        <option value="SPIRITISM">SPIRITISM</option>
+                                                                        <option value="TENRIKYO">TENRIKYO</option>
+                                                                        <option value="UNITARIAN-UNIVERSALISM">UNITARIAN-UNIVERSALISM</option>
+                                                                        <option value="ZOROASTRIANISM">ZOROASTRIANISM</option>
+                                                                        <option value="OTHERS/RELIGION NOT SPECIFIED">OTHERS/RELIGION NOT SPECIFIED</option>
+                                                                </select>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="army">Army/Defence Background </label>
+                                                                    <select class="form-control" #army="ngModel" ngModel name="army" list="army" [(ngModel)]="info[0]['army_background']">
+                                                                        <option disabled value="">Select Option</option>
+                                                                        <option value="No">No</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="accomodation">Do you need Hostel Accommodation? </label>
+                                                                    <select class="form-control" #accomodation="ngModel" ngModel name="accomodation" list="accomodate" [(ngModel)]="info[0]['accomodation']">
+                                                                        <option disabled value="">Select Option</option>
+                                                                        <option value="No">No</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <input type="submit"  value="Save & Next" class="btn btn-primary" [disabled]="application.invalid">
+                                                                    <div class="submitting"></div>
+                                                                </div>
+                                                            </div>
+                                                                
+
+                                                        </div>
+                                                        </form>
+                                                    </div>  
+
+                                                    <div id="step2" *ngIf="currentstep === 2">
+                                                        <form #application="ngForm" (ngSubmit)="apply(application.value)" autocomplete="disabled" autocomplete="off" class="contactForm">
+                                                            <input type="hidden" name="id" [(ngModel)]="currentformid" />
+                                                            <input type="hidden" name="currentstepval" [(ngModel)]="currentstep" />
+                                                        <div class="pl-0 pb-2">
+                                                            <h4 class="formsubtitle">Parent / Communication Details</h4>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Father Name <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" required #father="ngModel" ngModel name="father" [(ngModel)]="info[0]['father']">
+                                                                    <span *ngIf="father.invalid && ((father.dirty || father.touched))" class="text-danger smallalert">Enter Father Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Mother Name <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" required #mother="ngModel" ngModel name="mother" [(ngModel)]="info[0]['mother']">
+                                                                    <span *ngIf="mother.invalid && ((mother.dirty || mother.touched))" class="text-danger smallalert">Enter Mother Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Enter Parent Email id</label>
+                                                                    <input type="email" class="form-control" #parent_email="ngModel" ngModel name="parent_email" [(ngModel)]="info[0]['parent_email']">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Enter Parent Mobile No.</label>
+                                                                    <input type="tel" class="form-control"  #parent_mobile="ngModel" ngModel name="parent_mobile" [(ngModel)]="info[0]['parent_mobile']">
+                                                                </div>
+                                                            </div>
+
+                                                            
+                                                            <div class="col-md-12">
+                                                                <div class="docsection mb-2">Communication Details</div>
+                                                            </div>
+                                                            
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">State Name <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" required #state="ngModel" ngModel name="state" [(ngModel)]="info[0]['state']">
+                                                                    <span *ngIf="state.invalid && ((state.dirty || state.touched))" class="text-danger smallalert">Enter State Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">City Name <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" required #city="ngModel" ngModel name="city" [(ngModel)]="info[0]['city']">
+                                                                    <span *ngIf="city.invalid && ((city.dirty || city.touched))" class="text-danger smallalert">Enter City Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Enter Address <span class="req">*</span></label>
+                                                                    <textarea class="form-control" required #address="ngModel" ngModel name="address" [(ngModel)]="info[0]['address']"></textarea>
+                                                                    <span *ngIf="address.invalid && ((address.dirty || address.touched))" class="text-danger smallalert">Enter Address</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Pin Code <span class="req">*</span></label>
+                                                                    <input type="tel" class="form-control" required #pincode="ngModel" ngModel name="pincode" minlength="6" [(ngModel)]="info[0]['pincode']">
+                                                                    <span *ngIf="pincode.invalid && ((pincode.dirty || pincode.touched))" class="text-danger smallalert">Enter Pin Code</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <input type="submit"  value="Save & Next" class="btn btn-primary" [disabled]="application.invalid">
+                                                                    <div class="submitting"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                    </div> <!---- step 2 end here -->  
+                                                    
+                                                    <div id="step3" *ngIf="currentstep === 3">
+                                                        <form #application="ngForm" (ngSubmit)="apply(application.value)" autocomplete="disabled" autocomplete="off" class="contactForm">
+                                                            <input type="hidden" name="id" [(ngModel)]="currentformid" />
+                                                            <input type="hidden" name="currentstepval" [(ngModel)]="currentstep" />
+                                                        <div class="pl-0 pb-2">
+                                                            <h4 class="formsubtitle">Academic Details</h4>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="docsection">10th Educational Details</div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Name of Institute <span class="req">*</span></label>
+                                                                    <input type="text" class="form-control" required #instname10="ngModel" ngModel name="instname10" [(ngModel)]="info[0]['instname10']">
+                                                                    <span *ngIf="instname10.invalid && ((instname10.dirty || instname10.touched))" class="text-danger smallalert">Enter Institute Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Board<span class="req">*</span></label>
+                                                                    <select class="form-control browser-default custom-select" required #board10="ngModel"  [(ngModel)]="info[0]['board10']" ngModel name="board10">
+                                                                        <option disabled value="">Select Board</option>
+                                                                        <option value="CBSE"> CBSE</option>      
+                                                                        <option value="ICSE"> ICSE</option>      
+                                                                        <option value="State Board"> State Board</option>      
+                                                                        <option value="HSC"> HSC</option>  
+                                                                        <option value="IB Board"> IB Board</option>  
+                                                                        <option value="Cambridge Board"> Cambridge Board</option>  
+                                                                        <option value="National Institute Of Open Schooling">National Institute Of Open Schooling</option>  
+                                                                        <option value="Andhra Pradesh Board Of Secondary Education">Andhra Pradesh Board Of Secondary Education</option>  
+                                                                        <option value="Telangana Board of Secondary Education">Telangana Board of Secondary Education</option>  
+                                                                        <option value="Bihar School Examination Board">Bihar School Examination Board</option>  
+                                                                        <option value="West Bengal Board Of Secondary Education">West Bengal Board Of Secondary Education</option>  
+                                                                        <option value="U.P. Board Of High School And Intermediate Education">U.P. Board Of High School And Intermediate Education</option>  
+                                                                        <option value="Goa Board Of Secondary And Higher Secondary Education">Goa Board Of Secondary And Higher Secondary Education</option>  
+                                                                        <option value="Maharastra State Board Of Secondary And Higher Secondary Education">Maharastra State Board Of Secondary And Higher Secondary Education</option>  
+                                                                        <option value="Aligarh Muslim University">Aligarh Muslim University</option>  
+                                                                        <option value="Assam Board Of Secondary Education">Assam Board Of Secondary Education</option>  
+                                                                        <option value="Banasthali Vidyapith">Banasthali Vidyapith</option>  
+                                                                        <option value="Board of Vocational Higher Secondary Education">Board of Vocational Higher Secondary Education</option>  
+                                                                        <option value="Cambridge University">Cambridge University</option>  
+                                                                        <option value="Chhatisgarh Board Of Secondary Education">Chhatisgarh Board Of Secondary Education</option>  
+                                                                        <option value="Dayalbagh Educational Institute">Dayalbagh Educational Institute</option>
+                                                                        <option value="Directorate Of Army Education">Directorate Of Army Education</option>
+                                                                        <option value="Gujarat Secondary And Higher Secondary Education Board">Gujarat Secondary And Higher Secondary Education Board</option>
+                                                                        <option value="Haryana Board Of Education">Haryana Board Of Education</option>
+                                                                        <option value="Himachal Pradesh Board Of School Education">Himachal Pradesh Board Of School Education</option>
+                                                                        <option value="International Baccalaureate">International Baccalaureate</option>
+                                                                        <option value="J And K State Board Of School Education">J And K State Board Of School Education</option>
+                                                                        <option value="Jharkhand Academic Council">Jharkhand Academic Council</option>
+                                                                        <option value="Karnataka Secondary Education Examination Board">Karnataka Secondary Education Examination Board</option>
+                                                                        <option value="Kerala Board of Public Examinations">Kerala Board of Public Examinations</option>
+                                                                        <option value="Kerala Secondary Education Examination Board">Kerala Secondary Education Examination Board</option>
+                                                                        <option value="Madhya Pradesh Board Of Secondary Education">Madhya Pradesh Board Of Secondary Education</option>
+                                                                        <option value="Manipur Board Of Secondary Education">Manipur Board Of Secondary Education</option>
+                                                                        <option value="Meghalaya Board Of School Education">Meghalaya Board Of School Education</option>
+                                                                        <option value="Mizoram Board Of School Education">Mizoram Board Of School Education</option>
+                                                                        <option value="Nagaland Board Of School Education">Nagaland Board Of School Education</option>
+                                                                        <option value="Orissa Board Of Secondary Education">Orissa Board Of Secondary Education</option>
+                                                                        <option value="Punjab School Education Board">Punjab School Education Board</option>
+                                                                        <option value="Rajasthan Board Of Secondary Education">Rajasthan Board Of Secondary Education</option>
+                                                                        <option value="Rashtriya Sanskrit Sansthan">Rashtriya Sanskrit Sansthan</option>
+                                                                        <option value="Tamil Nadu Board Of Secondary Education">Tamil Nadu Board Of Secondary Education</option>
+                                                                        <option value="Tripura Board Of Secondary Education">Tripura Board Of Secondary Education</option>
+                                                                        <option value="Uttarakhand Board of School Education">Uttarakhand Board of School Education</option>
+                                                                        <option value="Uttaranchal Shiksha Evam Pariksha Parishad">Uttaranchal Shiksha Evam Pariksha Parishad</option>
+                                                                        <option value="West Bengal Board Of Madarsa Education">West Bengal Board Of Madarsa Education</option>  
+                                                                        <option value="Other International Board">Other International Board</option>  
+                                                                    </select>
+                                                                    <span *ngIf="board10.invalid && ((board10.dirty || board10.touched))" class="text-danger smallalert">Select Board</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Year of Passing</label>
+                                                                    <input type="text" class="form-control" required #passingyr10="ngModel" ngModel name="passingyr10" [(ngModel)]="info[0]['passingyr10']">
+                                                                    <span *ngIf="passingyr10.invalid && ((passingyr10.dirty || passingyr10.touched))" class="text-danger smallalert">Passing Year</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">Evalution Type</label>
+                                                                    <select  class="form-control" required #evalution10="ngModel" ngModel name="evalution10" [(ngModel)]="info[0]['evalution10']">
+                                                                        <option value="Percentage">Percentage</option>
+                                                                        <option value="CPGA">CPGA</option>
+                                                                    </select>
+                                                                    <span *ngIf="evalution10.invalid && ((evalution10.dirty || evalution10.touched))" class="text-danger smallalert">Select Evalution Type</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="label" for="name">10th Perecntage / Gr.</label>
+                                                                    <input type="text" class="form-control" required #grade10="ngModel" ngModel name="grade10" [(ngModel)]="info[0]['grade10']">
+                                                                    <span *ngIf="grade10.invalid && ((grade10.dirty || grade10.touched))" class="text-danger smallalert">Grade / Percentage.</span>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="docsection">12th Educational Details</div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Name of Institute <span class="req">*</span></label>
+                                                                        <input type="text" class="form-control" required #instname12="ngModel" ngModel name="instname12" [(ngModel)]="info[0]['instname12']">
+                                                                        <span *ngIf="instname12.invalid && ((instname12.dirty || instname12.touched))" class="text-danger smallalert">Enter Institute Name</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Board<span class="req">*</span></label>   
+                                                                        <select class="form-control browser-default custom-select" required #board12="ngModel" ngModel name="board12" [(ngModel)]="info[0]['board12']" list="boardtwl">
+                                                                            <option disabled value="">Select Board</option>
+                                                                            <option value="CBSE"> CBSE</option>      
+                                                                            <option value="ICSE"> ICSE</option>      
+                                                                            <option value="State Board"> State Board</option>      
+                                                                            <option value="HSC"> HSC</option>  
+                                                                            <option value="IB Board"> IB Board</option>  
+                                                                            <option value="Cambridge Board"> Cambridge Board</option>  
+                                                                            <option value="National Institute Of Open Schooling">National Institute Of Open Schooling</option>  
+                                                                            <option value="Andhra Pradesh Board Of Secondary Education">Andhra Pradesh Board Of Secondary Education</option>  
+                                                                            <option value="Telangana Board of Secondary Education">Telangana Board of Secondary Education</option>  
+                                                                            <option value="Bihar School Examination Board">Bihar School Examination Board</option>  
+                                                                            <option value="West Bengal Board Of Secondary Education">West Bengal Board Of Secondary Education</option>  
+                                                                            <option value="U.P. Board Of High School And Intermediate Education">U.P. Board Of High School And Intermediate Education</option>  
+                                                                            <option value="Goa Board Of Secondary And Higher Secondary Education">Goa Board Of Secondary And Higher Secondary Education</option>  
+                                                                            <option value="Maharastra State Board Of Secondary And Higher Secondary Education">Maharastra State Board Of Secondary And Higher Secondary Education</option>  
+                                                                            <option value="Aligarh Muslim University">Aligarh Muslim University</option>  
+                                                                            <option value="Assam Board Of Secondary Education">Assam Board Of Secondary Education</option>  
+                                                                            <option value="Banasthali Vidyapith">Banasthali Vidyapith</option>  
+                                                                            <option value="Board of Vocational Higher Secondary Education">Board of Vocational Higher Secondary Education</option>  
+                                                                            <option value="Cambridge University">Cambridge University</option>  
+                                                                            <option value="Chhatisgarh Board Of Secondary Education">Chhatisgarh Board Of Secondary Education</option>  
+                                                                            <option value="Dayalbagh Educational Institute">Dayalbagh Educational Institute</option>
+                                                                            <option value="Directorate Of Army Education">Directorate Of Army Education</option>
+                                                                            <option value="Gujarat Secondary And Higher Secondary Education Board">Gujarat Secondary And Higher Secondary Education Board</option>
+                                                                            <option value="Haryana Board Of Education">Haryana Board Of Education</option>
+                                                                            <option value="Himachal Pradesh Board Of School Education">Himachal Pradesh Board Of School Education</option>
+                                                                            <option value="International Baccalaureate">International Baccalaureate</option>
+                                                                            <option value="J And K State Board Of School Education">J And K State Board Of School Education</option>
+                                                                            <option value="Jharkhand Academic Council">Jharkhand Academic Council</option>
+                                                                            <option value="Karnataka Secondary Education Examination Board">Karnataka Secondary Education Examination Board</option>
+                                                                            <option value="Kerala Board of Public Examinations">Kerala Board of Public Examinations</option>
+                                                                            <option value="Kerala Secondary Education Examination Board">Kerala Secondary Education Examination Board</option>
+                                                                            <option value="Madhya Pradesh Board Of Secondary Education">Madhya Pradesh Board Of Secondary Education</option>
+                                                                            <option value="Manipur Board Of Secondary Education">Manipur Board Of Secondary Education</option>
+                                                                            <option value="Meghalaya Board Of School Education">Meghalaya Board Of School Education</option>
+                                                                            <option value="Mizoram Board Of School Education">Mizoram Board Of School Education</option>
+                                                                            <option value="Nagaland Board Of School Education">Nagaland Board Of School Education</option>
+                                                                            <option value="Orissa Board Of Secondary Education">Orissa Board Of Secondary Education</option>
+                                                                            <option value="Punjab School Education Board">Punjab School Education Board</option>
+                                                                            <option value="Rajasthan Board Of Secondary Education">Rajasthan Board Of Secondary Education</option>
+                                                                            <option value="Rashtriya Sanskrit Sansthan">Rashtriya Sanskrit Sansthan</option>
+                                                                            <option value="Tamil Nadu Board Of Secondary Education">Tamil Nadu Board Of Secondary Education</option>
+                                                                            <option value="Tripura Board Of Secondary Education">Tripura Board Of Secondary Education</option>
+                                                                            <option value="Uttarakhand Board of School Education">Uttarakhand Board of School Education</option>
+                                                                            <option value="Uttaranchal Shiksha Evam Pariksha Parishad">Uttaranchal Shiksha Evam Pariksha Parishad</option>
+                                                                            <option value="West Bengal Board Of Madarsa Education">West Bengal Board Of Madarsa Education</option>  
+                                                                            <option value="Other International Board">Other International Board</option>  
+                                                                        </select>
+                                                                        <span *ngIf="board12.invalid && ((board12.dirty || board12.touched))" class="text-danger smallalert">Select Board</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Year of Passing</label>
+                                                                        <input type="text" class="form-control" required #passingyr12="ngModel" ngModel name="passingyr12" [(ngModel)]="info[0]['passingyr12']">
+                                                                        <span *ngIf="passingyr12.invalid && ((passingyr12.dirty || passingyr12.touched))" class="text-danger smallalert">Passing Year</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Stream</label>
+                                                                        <select  class="form-control" required  #stream12="ngModel" ngModel name="stream12" [(ngModel)]="info[0]['stream12']">
+                                                                            <option value="Mathematics">Mathematics</option>
+                                                                            <option value="Biology">Biology</option>
+                                                                            <option value="Commerce">Commerce</option>
+                                                                            <option value="Other">Other</option>
+                                                                        </select>
+                                                                        <span *ngIf="stream12.invalid && ((stream12.dirty || stream12.touched))" class="text-danger smallalert">Select Stream</span>
+                                                                    </div>
+                                                                </div>
+                                                                 
+                                                                 
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Result Status</label>
+                                                                        <select class="form-control browser-default custom-select" #ref  (change)="resultawait(ref.value)"  required #result_status12="ngModel" ngModel name="result_status12" [(ngModel)]="info[0]['result_status12']">
+                                                                            <option disabled value="">Select Option</option>
+                                                                            <option value="Awaited">Awaited</option>
+                                                                            <option value="Declared">Declared</option>
+                                                                        </select>
+                                                                        <span *ngIf="result_status12.invalid && ((result_status12.dirty || result_status12.touched))" class="text-danger smallalert">Select Result Status</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" *ngIf="twlresult == false;">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">Evalution Type</label>
+                                                                        <select class="form-control" required #evalution12="ngModel"  [disabled]='twlresult' ngModel name="evalution12" [(ngModel)]="info[0]['evalution12']">                                                                         
+                                                                            <option value="Percentage">Percentage</option>
+                                                                            <option value="CPGA">CPGA</option>
+                                                                        </select>
+                                                                        <span *ngIf="evalution12.invalid && ((evalution12.dirty || evalution12.touched))" class="text-danger smallalert">Select Evalution Type</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" *ngIf="twlresult == false;">
+                                                                    <div class="form-group">
+                                                                        <label class="label" for="name">10th Perecntage / Grade</label>
+                                                                        <input type="text" class="form-control" required #grade12="ngModel" [disabled]='twlresult' ngModel name="grade12" [(ngModel)]="info[0]['grade12']">
+                                                                        <span *ngIf="grade12.invalid && ((grade12.dirty || grade12.touched))" class="text-danger smallalert">Grade / Percentage.</span>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <b>Do you have any diploma?</b><br/>
+                                                                        <span><input (click)="enable('yes')" #have_diploma="ngModel" ngModel required name="have_diploma" [(ngModel)]="info[0]['have_diploma']" value="yes" type="radio" style="min-height:5px!Important"/> Yes  </span>
+                                                                        <span class="pl-1"><input (click)="enable('no')" #have_diploma="ngModel" ngModel required name="have_diploma" [(ngModel)]="info[0]['have_diploma']" value="no" type="radio"  type="radio"style="min-height:5px!Important" /> No  </span>
+ 
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row" *ngIf="havediploma == false;">
+                                                                    <div class="col-md-12">
+                                                                        <div class="docsection">Diploma Details</div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Name of Institute <span class="req">*</span></label>
+                                                                            <input type="text" class="form-control" [disabled]='havediploma'  required #instnamedip="ngModel" ngModel name="instnamedip" [(ngModel)]="info[0]['instnamedip']">
+                                                                            <span *ngIf="instnamedip.invalid && ((instnamedip.dirty || instnamedip.touched))" class="text-danger smallalert">Enter Institute Name</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">University<span class="req">*</span></label>
+                                                                            <input type="text" class="form-control" [disabled]='havediploma' required #universitydip="ngModel" ngModel name="universitydip" [(ngModel)]="info[0]['universitydip']">
+                                                                            <span *ngIf="universitydip.invalid && ((universitydip.dirty || universitydip.touched))" class="text-danger smallalert">Enter University Name</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Year of Passing</label>
+                                                                            <input type="text" class="form-control" [disabled]='havediploma' required #passingyrdip="ngModel" ngModel name="passingyrdip" [(ngModel)]="info[0]['passingyrdip']">
+                                                                            <span *ngIf="passingyrdip.invalid && ((passingyrdip.dirty || passingyrdip.touched))" class="text-danger smallalert">Enter Passing Year</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Result Status</label>
+                                                                            <select class="form-control" [disabled]='havediploma' #mps  (change)="resultdiploma(mps.value)"  required #result_statusdip="ngModel"  ngModel name="result_statusdip" [(ngModel)]="info[0]['result_statusdip']">
+                                                                                <option value="Awaited">Awaited</option>
+                                                                                <option value="Declared">Declared</option>
+                                                                            </select>
+                                                                            <span *ngIf="result_statusdip.invalid && ((result_statusdip.dirty || result_statusdip.touched))" class="text-danger smallalert">Select Result Status</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2" *ngIf="diplomaresult == false;">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Evalution Type</label>
+                                                                            <select class="form-control" [disabled]='havediploma' [disabled]='diplomaresult'  required #evalutiondip="ngModel" ngModel name="evalutiondip" [(ngModel)]="info[0]['evalutiondip']">
+                                                                                <option value="Percentage">Percentage</option>
+                                                                                <option value="CPGA">CPGA</option>
+                                                                            </select>
+                                                                            <span *ngIf="evalutiondip.invalid && ((evalutiondip.dirty || evalutiondip.touched))" class="text-danger smallalert">Select Evalution Type</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3" *ngIf="diplomaresult == false;">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Diploma  Percentage/ Grade</label>
+                                                                            <input type="text" class="form-control" [disabled]='havediploma' [disabled]='diplomaresult'  required #gradedip="ngModel" ngModel name="gradedip" [(ngModel)]="info[0]['gradedip']">
+                                                                            <span *ngIf="gradedip.invalid && ((gradedip.dirty || gradedip.touched))" class="text-danger smallalert">Grade / Percentage</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <b>Do you have any Graduation Details?</b><br/>
+                                                                            <span><input (click)="ug('yes')" #have_degree="ngModel" [(ngModel)]="info[0]['have_degree']"  ngModel required name="have_degree" value="yes" type="radio" style="min-height:5px!Important"/> Yes  </span>
+                                                                            <span class="pl-1"><input (click)="ug('no')" #have_degree="ngModel" [(ngModel)]="info[0]['have_degree']"  ngModel required name="have_degree" value="no"   type="radio"style="min-height:5px!Important" /> No  </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row" *ngIf="havedegree == false;">
+                                                                        <div class="col-md-12">
+                                                                            <div class="docsection">Graduation Details</div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">Degree <span class="req">*</span></label>
+                                                                                <input type="text" class="form-control" [disabled]='havedegree' required #degree="ngModel" ngModel name="degree" [(ngModel)]="info[0]['degree']">
+                                                                                <span *ngIf="degree.invalid && ((degree.dirty || degree.touched))" class="text-danger smallalert">Enter Degree Name</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">College Name<span class="req">*</span></label>
+                                                                                <input type="text" class="form-control" [disabled]='havedegree' required #college="ngModel" ngModel name="college" [(ngModel)]="info[0]['college']">
+                                                                                <span *ngIf="college.invalid && ((college.dirty || college.touched))" class="text-danger smallalert">Enter College Name</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">University<span class="req">*</span></label>
+                                                                                <input type="text" class="form-control" [disabled]='havedegree' required #university="ngModel" ngModel name="university" [(ngModel)]="info[0]['university']">
+                                                                                <span *ngIf="university.invalid && ((university.dirty || university.touched))" class="text-danger smallalert">Enter University Name</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">Year of Passing<span class="req">*</span></label>
+                                                                                <input type="text" class="form-control" [disabled]='havedegree' required #graduationpassing="ngModel" ngModel name="graduationpassing" [(ngModel)]="info[0]['graduationpassing']">
+                                                                                <span *ngIf="graduationpassing.invalid && ((graduationpassing.dirty || graduationpassing.touched))" class="text-danger smallalert">Enter Passing Year</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">Mode of Study<span class="req">*</span></label>
+                                                                                <select  class="form-control" [disabled]='havedegree' required #modestudy="ngModel" ngModel name="modestudy" [(ngModel)]="info[0]['modestudy']">
+                                                                                    <option value="Regular">Regular</option>
+                                                                                    <option value="Correspondence">Correspondence</option>
+                                                                                </select>
+                                                                                <span *ngIf="modestudy.invalid && ((modestudy.dirty || modestudy.touched))" class="text-danger smallalert">Select Mode of Study</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">Exam Type<span class="req">*</span></label>
+                                                                                <select class="form-control" [disabled]='havedegree' required #examtype="ngModel" ngModel name="examtype" [(ngModel)]="info[0]['examtype']">
+                                                                                    <option value="Semester Wise">Semester Wise</option>
+                                                                                    <option value="Year Wise">Year Wise</option>
+                                                                                </select>
+                                                                                <span *ngIf="examtype.invalid && ((examtype.dirty || examtype.touched))" class="text-danger smallalert">Select Exam Type</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="name">Area of Specialization<span class="req">*</span></label>
+                                                                                <input type="text" class="form-control" [disabled]='havedegree' required #specialization="ngModel" ngModel name="specialization" [(ngModel)]="info[0]['specialization']">
+                                                                                <span *ngIf="specialization.invalid && ((specialization.dirty || specialization.touched))" class="text-danger smallalert">Area of Specialization</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <input type="submit"  value="Save & Next" class="btn btn-primary button" [disabled]="application.invalid">
+                                                                                <div class="submitting"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                        </div> <!---- step 3 end here --> 
+
+                                                        
+
+                                                        <div id="step4" *ngIf="currentstep === 4">
+                                                            <form #application="ngForm" (ngSubmit)="apply(application.value)" autocomplete="disabled" autocomplete="off" class="contactForm">
+                                                                <input type="hidden" name="id" [(ngModel)]="currentformid" />
+                                                                <input type="hidden" name="currentstepval" [(ngModel)]="currentstep" />
+                                                            <div class="pl-0 pb-2">
+                                                                <h4 class="formsubtitle">Upload Your Document</h4> 
+                                                            </div>
+
+                                                            <div [ngClass]="showsuccess === true ? 'alert-success' : 'alert-danger'" class="alert alert-dismissible fade show" role="alert" *ngIf="uploaderror">
+                                                                <strong>Alert:</strong> {{uploaderror}}
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+
+
+                                                            <div class="row">
+
+
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Your Photo <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #student_pic type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="student_pic"  id="formFile">
+                                                                        <div *ngIf="info[0]['student_pic']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i><a href="{{info[0]['student_pic']}}" target="_blank"> View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('student_pic')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('student_pic')" [disabled]="student_pic.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+
+
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Your Aadhar <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #aadhar type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="aadhar"  id="formFile">
+                                                                        <div *ngIf="info[0]['aadhar']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i> <a href="{{info[0]['aadhar']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('aadhar')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('aadhar')" [disabled]="aadhar.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+
+                                                                <!-- <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Pan Card <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #pancard type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="pancard"  id="formFile">
+                                                                        <div *ngIf="info[0]['pancard']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i></small>
+                                                                            <small><a href="{{info[0]['pancard']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small><a  (click)="removefile('pancard')">Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('pancard')" [disabled]="pancard.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div> -->
+                                                                
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Your 10th Marksheet <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #marksheet_10 type="file" accept="file/*"   ngf-max-size="1MB" ngModel required #marksheet10="ngModel"  name="marksheet10"  id="formFile">
+                                                                        <div *ngIf="info[0]['marksheet_10']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i><a href="{{info[0]['marksheet_10']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('marksheet_10')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('marksheet_10')" [disabled]="marksheet_10.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+                                                                 
+
+                                                                
+
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Your 12th Marksheet <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #marksheet_12 type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="marksheet_12"  id="formFile">
+                                                                        <div *ngIf="info[0]['marksheet_12']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i><a href="{{info[0]['marksheet_12']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('marksheet_12')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('marksheet_12')" [disabled]="marksheet_12.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Your Diploma Certificate <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #marksheet_diploma type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="marksheet_diploma"  id="formFile">
+                                                                        <div *ngIf="info[0]['marksheet_diploma']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i><a href="{{info[0]['marksheet_diploma']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('marksheet_diploma')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('marksheet_diploma')" [disabled]="marksheet_diploma.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+
+                                                                <div class="col-md-3 pr-1">
+                                                                    <div class="form-group">
+
+                                                                        <label for="formFile" class="form-label">Uplaod Graduation Certificate <span class="req">*</span></label>
+                                                                        <input (change)="this.onFilechange($event)" required class="form-control"  #marksheet_graduation type="file" accept="file/*"   ngf-max-size="1MB" ngModel required    name="marksheet_graduation"  id="formFile">
+                                                                        <div *ngIf="info[0]['marksheet_graduation']">
+                                                                            <small><i class="fa fa-check-circle text-success"></i>  <a href="{{info[0]['marksheet_graduation']}}" target="_blank">View</a>&nbsp;</small>
+                                                                            <small class="float-r">&nbsp;&nbsp;&nbsp;<a title="Delete" (click)="removefile('marksheet_graduation')"><i class="fa fa-remove text-danger"></i> Delete</a></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1 pl-0">
+                                                                    <button (click)="this.upload('marksheet_graduation')" [disabled]="marksheet_graduation.value=='' " type="button" class="btn btn-success mt-4">Upload</button>
+                                                                </div>
+
+                                                                  
+    
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="submit"  value="Submit & Pay" class="btn btn-primary" [disabled]="application.invalid">
+                                                                        <div class="submitting"></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <hr/>
+                                                                    <small class="">-File format should be <strong>jpg, jpeg, png, pdf</strong></small><br/>
+                                                                    <small class="">-File size should be less than 1 MB.</small>
+                                                                </div>
+                                                                    
+    
+                                                            </div>
+                                                            </form>
+                                                        </div> <!----- step 4 -->
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <hr/>
+                                                                
+                                                            </div>
+                                                              
+                                                            <!-- *ngIf="this.currentstep !== 1" -->
+                                                            <div class="col-md-12">
+                                                                <button [disabled]="this.currentstep === 1"  (click)="back(this.currentstep)" class="btn btn-danger" type="button"> << Back </button>
+                                                                <button [disabled]="stepDB === this.currentstep"   (click)="next(this.currentstep)" class="btn btn-danger float-r" type="button"> Next > > </button>
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                     
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+ 
